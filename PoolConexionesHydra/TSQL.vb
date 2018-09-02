@@ -12,6 +12,9 @@ Public Class TSQL
     Private Shared WithEvents temporizador As Timers.Timer
     Private Shadows Const TESPERA As Short = 10 '10 minutos
 
+    Private Shared _conexionPerm_PRUEBA As SqlConnection
+
+
     Private Shared Sub ControlarTiempoInactividad(ByVal sender As Object, ByVal e As System.Timers.ElapsedEventArgs) Handles temporizador.Elapsed
         If VigilanteConexion.TiempoInactividad.Minutes > TESPERA Then
             If Not VigilanteConexion.CnnActual Is Nothing Then
@@ -62,37 +65,44 @@ Public Class TSQL
 
     End Class
 
+
+
     'Establece una conexion permanente al servidor de datos en caso no exista una
-    Public Shared ReadOnly Property ConexionPermanente() As SqlConnection
+    Public Shared Property ConexionPermanente() As SqlConnection
         Get
-            Try
-                If VigilanteConexion.CnnActual Is Nothing Then
+            'Try
+            '    If VigilanteConexion.CnnActual Is Nothing Then
 
-                    VigilanteConexion.CnnActual = New SqlConnection(VigilanteConexion.CadenaConexion)
-                    VigilanteConexion.CnnActual.Open()
-                    'Lanzo temporizador
-                    VigilanteConexion.HoraUltimaOperacion = Date.Now
-                    temporizador.Start()
+            '        VigilanteConexion.CnnActual = New SqlConnection(VigilanteConexion.CadenaConexion)
+            '        VigilanteConexion.CnnActual.Open()
+            '        'Lanzo temporizador
+            '        VigilanteConexion.HoraUltimaOperacion = Date.Now
+            '        temporizador.Start()
 
-                Else
-                    If VigilanteConexion.CnnActual.State = ConnectionState.Closed Then
-                        VigilanteConexion.CnnActual.Open()
-                        'Lanzo temporizador
-                        VigilanteConexion.HoraUltimaOperacion = Date.Now
-                        temporizador.Start()
-                    End If
+            '    Else
+            '        If VigilanteConexion.CnnActual.State = ConnectionState.Closed Then
+            '            VigilanteConexion.CnnActual.Open()
+            '            'Lanzo temporizador
+            '            VigilanteConexion.HoraUltimaOperacion = Date.Now
+            '            temporizador.Start()
+            '        End If
 
-                End If
-            Catch ex As Exception
-                Mensaje = "Fuente: " & ex.Source & vbCrLf & "Mensaje: " & ex.Message
-                VigilanteConexion.CnnActual = Nothing
-                If temporizador.Enabled Then
-                    temporizador.Stop()
-                End If
-            End Try
-
-            Return VigilanteConexion.CnnActual
+            '    End If
+            'Catch ex As Exception
+            '    Mensaje = "Fuente: " & ex.Source & vbCrLf & "Mensaje: " & ex.Message
+            '    VigilanteConexion.CnnActual = Nothing
+            '    If temporizador.Enabled Then
+            '        temporizador.Stop()
+            '    End If
+            'End Try
+            'Return VigilanteConexion.CnnActual
+            Return _conexionPerm_PRUEBA
         End Get
+        'esto se agrego solo para prueba
+        Set(ByVal value As SqlConnection)
+            _conexionPerm_PRUEBA = value
+        End Set
+        'eliminar hasta aca
     End Property
 
     'Dar por concluida una conexion permanente al servidor de datos
@@ -277,7 +287,7 @@ Public Class TSQL
 
         Try
             '-- Adiciono los parametros de entrada --
-            OdbcCmd.Parameters.AddWithValue("@IdSistema", HYDRAEntidades.SesionUsuario.IDSistema) ' idaplicacion
+            OdbcCmd.Parameters.AddWithValue("@IdSistema", SesionUsuario.IDSistema) ' idaplicacion
             OdbcCmd.Parameters.AddWithValue("@Usuario", User)
             OdbcCmd.Parameters.AddWithValue("@ClaveEnc", ClaveEnc)
             '-- Adiciono variables de retorno --

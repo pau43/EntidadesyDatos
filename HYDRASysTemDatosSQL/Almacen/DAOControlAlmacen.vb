@@ -32,6 +32,7 @@ Namespace DAOAlmacen
             Try
                 cmd.CommandText = "[CENTRAL].[Almacen].[SpAlm_AL_ListarProductosAlmacenes]"
                 'cmd.Connection = TSQL.ConexionPermanente     ''FALTA IMPLEMENTAR EL POOLCONEXIONES
+                cmd.Connection = New SqlConnection("Data Source=ANTHONY-PC\SERVIDORCHICAMA;Initial Catalog=HYDRA-CENTRAL;Persist Security Info=True;User ID=sa;Password=12345")
                 cmd.CommandType = CommandType.StoredProcedure
                 cmd.Parameters.AddWithValue("@IdAlmacen", idAlmacen)
                 cmd.Parameters.AddWithValue("@PeriodoRecibido", periodoRecibido)

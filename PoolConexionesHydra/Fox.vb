@@ -1,4 +1,4 @@
-﻿Imports GEACEntidades
+﻿
 Imports System.Data.Odbc
 
 Public Class Fox

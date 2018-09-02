@@ -854,44 +854,44 @@ Public NotInheritable Class SesionUsuario
             End Get
         End Property
 
-        Public Shared Function SeleccionarSerieGRT(ByVal oDtSeries As DataTable, ByVal IDSerie As Integer) As Boolean
-            _CodServTransp = String.Empty
-            _ServicioTransporte = String.Empty
-            _IDSerie = -1
-            _Serie = String.Empty
-            _Descripcion = String.Empty
-            _CodEmpresa = String.Empty
-            _Empresa = String.Empty
-            _IDPuntoControl = -1
-            If oDtSeries Is Nothing Then Return False
-            Try
-                Dim oDV As New DataView(oDtSeries, String.Format("IDSerieGRT={0}", IDSerie), "", DataViewRowState.OriginalRows)
-                If oDV.Count = 1 Then
-                    With oDV.Item(0)
-                        _CodServTransp = .Item("CodServTransp")
-                        _ServicioTransporte = .Item("Servicio")
-                        _IDSerie = .Item("IDSerieGRT")
-                        _Serie = .Item("Serie")
-                        _Descripcion = .Item("Descripcion")
-                        _CodEmpresa = .Item("CodEmpresa")
-                        _Empresa = .Item("Empresa")
-                        _IDCliente = If(.Item("IDCliente") Is DBNull.Value, -1, .Item("IDCliente"))
-                        _Cliente = If(.Item("Cliente") Is DBNull.Value, String.Empty, .Item("Cliente"))
-                        _IDPuntoControl = .Item("IDPunto")
-                        _IDUsuario = .Item("IDUsuario")
-                        ' _RucEmpresa = .Item("RUC")
-                    End With
-                    oDV = Nothing
-                    Return True
-                ElseIf oDV.Count = 0 Then
-                    MsgBox("Existen identificadores de Series Duplicados...", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
-                    Return False
-                End If
-            Catch ex As Exception
-                MsgBox(ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkCancel, "Error")
-                Return False
-            End Try
-        End Function
+        ''Public Shared Function SeleccionarSerieGRT(ByVal oDtSeries As DataTable, ByVal IDSerie As Integer) As Boolean
+        ''    _CodServTransp = String.Empty
+        ''    _ServicioTransporte = String.Empty
+        ''    _IDSerie = -1
+        ''    _Serie = String.Empty
+        ''    _Descripcion = String.Empty
+        ''    _CodEmpresa = String.Empty
+        ''    _Empresa = String.Empty
+        ''    _IDPuntoControl = -1
+        ''    If oDtSeries Is Nothing Then Return False
+        ''    Try
+        ''        Dim oDV As New DataView(oDtSeries, String.Format("IDSerieGRT={0}", IDSerie), "", DataViewRowState.OriginalRows)
+        ''        If oDV.Count = 1 Then
+        ''            With oDV.Item(0)
+        ''                _CodServTransp = .Item("CodServTransp")
+        ''                _ServicioTransporte = .Item("Servicio")
+        ''                _IDSerie = .Item("IDSerieGRT")
+        ''                _Serie = .Item("Serie")
+        ''                _Descripcion = .Item("Descripcion")
+        ''                _CodEmpresa = .Item("CodEmpresa")
+        ''                _Empresa = .Item("Empresa")
+        ''                _IDCliente = If(.Item("IDCliente") Is DBNull.Value, -1, .Item("IDCliente"))
+        ''                _Cliente = If(.Item("Cliente") Is DBNull.Value, String.Empty, .Item("Cliente"))
+        ''                _IDPuntoControl = .Item("IDPunto")
+        ''                _IDUsuario = .Item("IDUsuario")
+        ''                ' _RucEmpresa = .Item("RUC")
+        ''            End With
+        ''            oDV = Nothing
+        ''            Return True
+        ''        ElseIf oDV.Count = 0 Then
+        ''            MsgBox("Existen identificadores de Series Duplicados...", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+        ''            Return False
+        ''        End If
+        ''    Catch ex As Exception
+        ''        MsgBox(ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkCancel, "Error")
+        ''        Return False
+        ''    End Try
+        ''End Function
 
         Public Sub New()
 

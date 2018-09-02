@@ -43,10 +43,6 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HYDRAEntidades, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\HYDRAEntidades\bin\Debug\HYDRAEntidades.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -70,7 +66,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Almacen\DAOControlAlmacen.vb" />
-    <Compile Include="Class1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -86,6 +81,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="RADA\DAORada.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -112,6 +108,16 @@
     <Folder Include="PadronUsuarios\" />
     <Folder Include="PCR\" />
     <Folder Include="Tarifas\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HYDRAEntidades\HYDRAEntidades.vbproj">
+      <Project>{ed485a0c-5dc0-473a-a574-258c0ad2772b}</Project>
+      <Name>HYDRAEntidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PoolConexionesHydra\PoolConexionesHydra.vbproj">
+      <Project>{01dba4e6-735b-4976-ba15-69230266131a}</Project>
+      <Name>PoolConexionesHydra</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
